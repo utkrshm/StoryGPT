@@ -1,0 +1,9 @@
+[runner]
+magicEnabled = false
+
+[theme]
+base = "dark"
+font = "sans serif"
+
+[server]
+runOnSave = true
