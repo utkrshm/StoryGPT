@@ -9,7 +9,6 @@ from llm import initialize_model
 from imageGen import *
 
 # Creating API Authentication functions
-# @st.cache_data()
 def auth():        
     os.environ['OPENAI_API_KEY'] = st.session_state.openai_api_key
     os.environ['STABILITY_KEY'] = st.session_state.dreamstudio_api_key
@@ -50,7 +49,7 @@ if 'dreamstudio_api_key' not in st.session_state:
 
 # Configuring the Sidebar
 with st.sidebar:
-    st.image('icons/logo-no-background.png')
+    st.image('icons/no bg logo.png')
     
     st.markdown('''
 This is an interactive storybook experience built using ChatGPT and Stable Diffusion.
@@ -71,7 +70,7 @@ This is an interactive storybook experience built using ChatGPT and Stable Diffu
             label='Your Stability.AI API Key', 
             key='dreamstudio_api_key',
             disabled=st.session_state.apiBox_state,
-            help='You can create your own Stability.AI API key by going to https://beta.dreamstudio.ai/account \n (Sign up required)'
+            help='You can create your own Stability.AI API key by going to https://beta.dreamstudio.ai/account (Sign up required)'
         )
         
         btn = st.form_submit_button(label='Begin StoryGPT!', on_click=auth)
@@ -119,7 +118,7 @@ def get_story_and_image(user_resp):
         elif response[1] == '.' or response[1] == ')' or response.startswith('Option'):
             opts.append(response) 
         else:
-            story += response + '\n\n'  
+            story += response + '\n'  
     
     return {
         'Story': story,
