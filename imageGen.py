@@ -5,6 +5,7 @@ from PIL import Image
 from stability_sdk import client
 import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 
+# This function assumes that an environment variable 'STABILITY_KEY' has already been set.
 def stability_setup():
     os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 
