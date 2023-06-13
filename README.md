@@ -2,6 +2,8 @@
 
 This is a storybook experience, that works like a choose-your-own-adventure book, built using OpenAI and StabilityAI's APIs.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://storybook-gpt.streamlit.app)
+
 ----
 
 ## Note:
