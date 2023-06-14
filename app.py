@@ -45,7 +45,8 @@ if 'openai_api_key' not in st.session_state:
     st.session_state['openai_api_key'] = ''
 if 'dreamstudio_api_key' not in st.session_state:
     st.session_state['dreamstudio_api_key'] = ''
-
+if 'genre_input' not in st.session_state:
+    st.session_state['genre_input'] = 'Be creative with the story'
 
 # Configuring the Sidebar
 with st.sidebar:
@@ -53,30 +54,32 @@ with st.sidebar:
     
     st.markdown('''
 This is an interactive storybook experience built using ChatGPT and Stable Diffusion.
-
+    ''')
+    
+    with st.expander('Instructions'):
+        st.markdown('''
 - To begin StoryGPT, please enter your own OpenAI API key, and the Dreamstudio API key.
 - After entering the API keys, please enter the genre/theme of your desired story, and watch the magic unfold.
-    ''')
+        ''')
     
     # Sidebar Form, wherein the user enters their API Keys. [Completed]
     with st.form(key='API Keys'):
         openai_key = st.text_input(
             label='Your OpenAI API Key', 
             key='openai_api_key',
+            type='password',
             disabled=st.session_state.apiBox_state,
             help='You can create your own OpenAI API key by going to https://platform.openai.com/account/api-keys (Sign up required)'
         )
         dreamstudio_key = st.text_input(
             label='Your Stability.AI API Key', 
             key='dreamstudio_api_key',
+            type='password',
             disabled=st.session_state.apiBox_state,
             help='You can create your own Stability.AI API key by going to https://beta.dreamstudio.ai/account (Sign up required)'
         )
         
         btn = st.form_submit_button(label='Begin StoryGPT!', on_click=auth)
-        
-        if btn:
-            print('Submitted!')
 
     st.info('**Note:** You can close the sidebar when you enter the API keys')
 
@@ -163,18 +166,20 @@ def generate_content(story, lbl_text, opts: list, img, el_id):
     expander = st.expander(f'Part {story_pt}', expanded=st.session_state[f'expanded_{el_id}'])   
     col1, col2 = expander.columns([0.65, 0.35])
     empty = st.empty()
-    col2.image(img, width=40, use_column_width='always')
+    if img:
+        col2.image(img, width=40, use_column_width='always')
     
     with col1:
         st.write(story)
         
-        with st.form(key=f'user_choice_{el_id}'): 
-            st.radio(lbl_text, opts, disabled=st.session_state[f'radio_{el_id}_disabled'], key=f'radio_{el_id}')
-            st.form_submit_button(
-                label="Let's move on!", 
-                disabled=st.session_state[f'submit_{el_id}_disabled'], 
-                on_click=get_output, args=[empty], kwargs={'el_id': el_id}
-            )
+        if lbl_text and opts:
+            with st.form(key=f'user_choice_{el_id}'): 
+                st.radio(lbl_text, opts, disabled=st.session_state[f'radio_{el_id}_disabled'], key=f'radio_{el_id}')
+                st.form_submit_button(
+                    label="Let's move on!", 
+                    disabled=st.session_state[f'submit_{el_id}_disabled'], 
+                    on_click=get_output, args=[empty], kwargs={'el_id': el_id}
+                )
 
 
 def add_new_data(*data):
@@ -196,8 +201,7 @@ with st.container():
     col_1.text_input(
         label='Enter the theme/genre of your story',
         key='genre_input',
-        value='Be creative with the story',
-        placeholder='Enter the theme/genre of which you want the story to be', 
+        placeholder='Enter the theme of which you want the story to be', 
         disabled=st.session_state.genreBox_state
     )
     col_2.write('')
