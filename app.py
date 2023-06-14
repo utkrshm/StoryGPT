@@ -9,7 +9,7 @@ from llm import initialize_model
 from imageGen import *
 
 # Creating API Authentication functions
-def auth():        
+def auth():    
     os.environ['OPENAI_API_KEY'] = st.session_state.openai_api_key
     os.environ['STABILITY_KEY'] = st.session_state.dreamstudio_api_key
     
@@ -46,20 +46,20 @@ if 'openai_api_key' not in st.session_state:
 if 'dreamstudio_api_key' not in st.session_state:
     st.session_state['dreamstudio_api_key'] = ''
 if 'genre_input' not in st.session_state:
-    st.session_state['genre_input'] = 'Be creative with the story'
+    st.session_state['genre_input'] = 'Use a random theme'
 
 # Configuring the Sidebar
 with st.sidebar:
     st.image('icons/no bg logo.png')
     
     st.markdown('''
-This is an interactive storybook experience built using ChatGPT and Stable Diffusion.
+    This is an interactive storybook experience built using ChatGPT and Stable Diffusion.
     ''')
     
     with st.expander('Instructions'):
         st.markdown('''
-- To begin StoryGPT, please enter your own OpenAI API key, and the Dreamstudio API key.
-- After entering the API keys, please enter the genre/theme of your desired story, and watch the magic unfold.
+        - To begin StoryGPT, please enter your own OpenAI API key, and the Dreamstudio API key.
+        - After entering the API keys, please enter the genre/theme of your desired story, and watch the magic unfold.
         ''')
     
     # Sidebar Form, wherein the user enters their API Keys. [Completed]
@@ -98,7 +98,7 @@ def get_story_and_image(user_resp):
         
     # Getting, and parsing through the responses received from the LLM
     bot_response = llm_model.predict(input=user_resp)
-        
+    print(bot_response)
     response_list = bot_response.split("\n")
                        
     responses = list(filter(lambda x: x != '' and x != '-- -- --', response_list))
@@ -116,12 +116,19 @@ def get_story_and_image(user_resp):
     label = ''
     for response in responses:
         response = response.strip()  
-        if response.startswith('What') or response.startswith('Which'):
+        if response.startswith('What') or response.startswith('Which') or response.startswith('Choose'):
             label = '**' + response + '**'
-        elif response[1] == '.' or response[1] == ')' or response.startswith('Option'):
+        elif response[1] == '.' or response[1] == ')' or response[1:4] == ' --' or response.startswith('Option'):
             opts.append(response) 
         else:
             story += response + '\n'  
+    
+    print({
+        'Story': story,
+        'Radio Label': label,
+        'Options': opts,
+        'Image': sd_img
+    })
     
     return {
         'Story': story,
@@ -131,8 +138,7 @@ def get_story_and_image(user_resp):
     }
     
     
-
-@st.cache_data(experimental_allow_widgets=True)
+@st.cache_data(experimental_allow_widgets=True, show_spinner='Generating your story...')
 def get_output(_pos: st.empty, el_id='', genre=''):
     st.session_state.keep_graphics = True
     
@@ -149,9 +155,8 @@ def get_output(_pos: st.empty, el_id='', genre=''):
         user_choice = genre
     
     with _pos:    
-        with st.spinner('Generating your story...'):
-            data = get_story_and_image(user_choice)
-            add_new_data(data['Story'], data['Radio Label'], data['Options'], data['Image'])
+        data = get_story_and_image(user_choice)
+        add_new_data(data['Story'], data['Radio Label'], data['Options'], data['Image'])
     
     
 def generate_content(story, lbl_text, opts: list, img, el_id):
@@ -215,7 +220,7 @@ with st.container():
     )
     col_3.write('')
     col_3.write('')
-    col_3.button(
+    begin = col_3.button(
         'Begin story →',
         on_click=get_output, args=[st.empty()], kwargs={'genre': st.session_state.genre_input},
         disabled=st.session_state.genreBox_state
