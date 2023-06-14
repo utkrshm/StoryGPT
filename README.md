@@ -1,9 +1,10 @@
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://storybook-gpt.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://story-gpt.streamlit.app)
 
 # StoryGPT
 
-This is a storybook experience, that works like a choose-your-own-adventure book, built using OpenAI and StabilityAI's APIs.
+This is a storybook experience, that works like a choose-your-own-adventure book, built on ChatGPT and Stable Diffusion.
 
+![https://youtu.be/bZG9hCiyFso]
 ----
 
 ## Note:
