@@ -4,7 +4,14 @@
 
 This is a storybook experience, that works like a choose-your-own-adventure book, built on ChatGPT and Stable Diffusion.
 
-![https://youtu.be/bZG9hCiyFso]
+View the demo of StoryGPT here:
+
+<div align='center'>
+  <a href="http://www.youtube.com/watch?feature=player_embedded&v=bZG9hCiyFso" target="_blank">
+    <img src="http://img.youtube.com/vi/bZG9hCiyFso/sddefault.jpg" alt="Watch the video"/>
+  </a>
+</div>
+
 ----
 
 ## Note:
