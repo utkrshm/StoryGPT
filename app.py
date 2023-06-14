@@ -123,13 +123,6 @@ def get_story_and_image(user_resp):
         else:
             story += response + '\n'  
     
-    print({
-        'Story': story,
-        'Radio Label': label,
-        'Options': opts,
-        'Image': sd_img
-    })
-    
     return {
         'Story': story,
         'Radio Label': label,
