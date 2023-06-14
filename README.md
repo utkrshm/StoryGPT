@@ -28,5 +28,5 @@ If you would like to help me make this better, please let me know so I can make 
 ----
 
 ## Roadmap
-- [] Use an open-source Stable Diffusion from HuggingFace Hub to replace Stability.AI's API to make this model more accessible.
-- [] Use an open-source LLM to replace OpenAI's API to make StoryGPT more accessible.
+- [ ] Use an open-source Stable Diffusion from HuggingFace Hub to replace Stability.AI's API to make this model more accessible.
+- [ ] Use an open-source LLM to replace OpenAI's API to make StoryGPT more accessible.
