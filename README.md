@@ -1,8 +1,16 @@
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://storybook-gpt.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://story-gpt.streamlit.app)
 
 # StoryGPT
 
-This is a storybook experience, that works like a choose-your-own-adventure book, built using OpenAI and StabilityAI's APIs.
+This is a storybook experience, that works like a choose-your-own-adventure book, built on ChatGPT and Stable Diffusion.
+
+View the demo of StoryGPT here:
+
+<div align='center'>
+  <a href="http://www.youtube.com/watch?feature=player_embedded&v=bZG9hCiyFso" target="_blank">
+    <img src="http://img.youtube.com/vi/bZG9hCiyFso/sddefault.jpg" alt="Watch the video"/>
+  </a>
+</div>
 
 ----
 
@@ -20,5 +28,5 @@ If you would like to help me make this better, please let me know so I can make 
 ----
 
 ## Roadmap
-- [] Use an open-source Stable Diffusion from HuggingFace Hub to replace Stability.AI's API to make this model more accessible.
-- [] Use an open-source LLM to replace OpenAI's API to make StoryGPT more accessible.
+- [ ] Use an open-source Stable Diffusion from HuggingFace Hub to replace Stability.AI's API to make this model more accessible.
+- [ ] Use an open-source LLM to replace OpenAI's API to make StoryGPT more accessible.
