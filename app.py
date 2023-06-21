@@ -51,7 +51,7 @@ if 'genre_input' not in st.session_state:
 # Configuring the Sidebar
 with st.sidebar:
     st.image('icons/no bg logo.png')
-    
+
     st.markdown('''
     This is an interactive storybook experience built using ChatGPT and Stable Diffusion.
     ''')
@@ -60,6 +60,7 @@ with st.sidebar:
         st.markdown('''
         - To begin StoryGPT, please enter your own OpenAI API key, and the Dreamstudio API key.
         - After entering the API keys, please enter the genre/theme of your desired story, and watch the magic unfold.
+        - [View demo here](https://www.youtube.com/watch?v=bZG9hCiyFso)
         ''')
     
     # Sidebar Form, wherein the user enters their API Keys. [Completed]
