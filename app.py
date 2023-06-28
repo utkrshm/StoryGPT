@@ -4,6 +4,7 @@ import streamlit as st
 from PIL import Image
 from time import sleep
 from streamlit_extras.app_logo import add_logo
+import webbrowser
 
 from llm import initialize_model
 from imageGen import *
@@ -60,7 +61,6 @@ with st.sidebar:
         st.markdown('''
         - To begin StoryGPT, please enter your own OpenAI API key, and the Dreamstudio API key.
         - After entering the API keys, please enter the genre/theme of your desired story, and watch the magic unfold.
-        - [View demo here](https://www.youtube.com/watch?v=bZG9hCiyFso)
         ''')
     
     # Sidebar Form, wherein the user enters their API Keys. [Completed]
@@ -82,6 +82,10 @@ with st.sidebar:
         
         btn = st.form_submit_button(label='Begin StoryGPT!', on_click=auth)
 
+    _, col, _ = st.columns([1, 2, 1])
+    
+    col.button('View Demo', on_click=lambda: webbrowser.open_new_tab('https://www.youtube.com/watch?v=bZG9hCiyFso'), use_container_width=True)
+    
     st.info('**Note:** You can close the sidebar when you enter the API keys')
 
 # Displaying the API Key warnings
