@@ -4,7 +4,7 @@ import streamlit as st
 from PIL import Image
 from time import sleep
 from streamlit_extras.app_logo import add_logo
-import webbrowser
+from streamlit.components.v1 import html
 
 from llm import initialize_model
 from imageGen import *
@@ -17,7 +17,16 @@ def auth():
     st.session_state.genreBox_state = False
     st.session_state.apiBox_state = True
 
+
+def open_demo():
+    open_script= """
+        <script type="text/javascript">
+            window.open('%s', '_blank').focus();
+        </script>
+    """ % 'https://www.youtube.com/watch?v=bZG9hCiyFso'
+    html(open_script)
   
+
 # Basic Page Configurations
 st.set_page_config(
     page_title='StoryBook GPT',
@@ -84,7 +93,7 @@ with st.sidebar:
 
     _, col, _ = st.columns([1, 2, 1])
     
-    col.button('View Demo', on_click=lambda: webbrowser.open_new_tab('https://www.youtube.com/watch?v=bZG9hCiyFso'), use_container_width=True)
+    col.button('View Demo', on_click=open_demo, use_container_width=True)
     
     st.info('**Note:** You can close the sidebar when you enter the API keys')
 
