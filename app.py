@@ -17,16 +17,6 @@ def auth():
     st.session_state.genreBox_state = False
     st.session_state.apiBox_state = True
 
-
-def open_demo():
-    open_script= """
-        <script type="text/javascript">
-            window.open('%s', '_blank').focus();
-        </script>
-    """ % 'https://www.youtube.com/watch?v=bZG9hCiyFso'
-    html(open_script)
-  
-
 # Basic Page Configurations
 st.set_page_config(
     page_title='StoryBook GPT',
@@ -91,9 +81,8 @@ with st.sidebar:
         
         btn = st.form_submit_button(label='Begin StoryGPT!', on_click=auth)
 
-    _, col, _ = st.columns([1, 2, 1])
-    
-    col.button('View Demo', on_click=open_demo, use_container_width=True)
+    with st.expander('For Demo'):
+        st.write('Go to [this YouTube video](https://www.youtube.com/watch?v=bZG9hCiyFso)')
     
     st.info('**Note:** You can close the sidebar when you enter the API keys')
 
